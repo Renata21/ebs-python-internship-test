@@ -28,6 +28,9 @@ class BlogListView(GenericAPIView):
 
 
 class BlogItemView(GenericAPIView):
+    '''
+    7 Endpoint that returns the Blog post object and list of comments.
+    '''
     serializer_class = BlogSerializer, CommentSerializer
 
     permission_classes = (AllowAny,)
@@ -35,7 +38,9 @@ class BlogItemView(GenericAPIView):
 
     def get(self, request, pk):
         blog = get_object_or_404(Blog.objects.filter(pk=pk))
+        # added comments form this blog 
         comments = Comment.objects.all().filter(blog_id=pk)
+        # added param dict for a return with 2 types of objects
         param = {
             "blog": BlogSerializer(blog).data,
             "comments": CommentSerializer(comments, many=True).data
@@ -45,7 +50,7 @@ class BlogItemView(GenericAPIView):
 
 class CreateBlogPostView(GenericAPIView):
     ''' 
-    Endpoint for creating a blog post that will add a new record in blog table
+    3 Endpoint for creating a blog post that will add a new record in blog table
     '''
     serializer_class = BlogSerializer
 
@@ -70,7 +75,7 @@ class CreateBlogPostView(GenericAPIView):
 
 class CreateCommentView(GenericAPIView):
     ''' 
-    Endpoint for creating a comment to a blog post
+    6 Endpoint for creating a comment to a blog post and created blog_comment table with these fields
     '''
     serializer_class = CommentSerializer
 

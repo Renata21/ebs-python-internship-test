@@ -15,6 +15,7 @@ class BlogSerializer(serializers.ModelSerializer):
         model = Blog
         fields = '__all__'
 
+# 5 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment

@@ -14,9 +14,13 @@ class Blog(models.Model):
     body = models.TextField()
     posted = models.DateField(db_index=True, auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    # 1 - added boolean field for Blog model and added this field in blog_blog table 
     enabled = models.BooleanField(default=True)
 
 
 class Comment(models.Model):
+    '''
+    4 added Comment model to save comments for each blog post 
+    '''
     text = models.TextField()
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
